@@ -1,23 +1,22 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String
 from geometry_msgs.msg import Twist
-class Control:
+class Control(Node):
     def __init__(self):
         super().__init__('Tutrle')
-        self.publisher = self.creat_publisher(Twist, '/cmd_vel', 15)
-        self.timer = self.creat_timer(0.5, self.timer_callback)
+        self.publisher = self.create_publisher(Twist, '/cmd_vel', 15)
+        self.timer = self.create_timer(0.5, self.motion)
     def motion(self):
         msg = Twist()
         msg.linear.x = 0.2
-        msg.linear.z = 0.0
+        msg.angular.z = 0.0
         self.publisher.publish(msg)
-    def main(args = None):
-        rclpy.init = (args = None)
+def main():
+        rclpy.init(args = None)
         Turtle_Bot = Control()
         rclpy.spin(Turtle_Bot)
-        node.destroy_node()
-        rlcpy.shutdown()
+        Turtle_Bot.destroy_node()
+        rclpy.shutdown()
 if __name__ == '__main__':
        main()
         
